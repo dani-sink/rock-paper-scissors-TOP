@@ -45,5 +45,48 @@ function getHumanChoice(){
 }
 
 
-console.log(getComputerChoice())
-console.log(getHumanChoice());
+function playRound(humanChoice, computerChoice){
+    console.log(`Player Choice: ${humanChoice.toUpperCase()}`);
+    console.log(`Computer Choice: ${computerChoice.toUpperCase()}`);
+    switch(humanChoice){
+        case 'rock':
+            if (computerChoice === 'rock'){
+                console.log("It's a tie! Rock does not win against itself. No points alloted for anyone.");
+            } else if (computerChoice === 'paper'){
+                console.log("You lose! Paper beats Rock. The computer gets one point.");
+                computerScore++;
+            } else if (computerChoice === 'scissors') {
+                console.log("You win! Rock beats Scissors. You get one point.");
+                humanScore++;
+            }
+            break;
+        case 'paper':
+            if (computerChoice === 'rock'){
+                console.log("You win! Paper beats Rock. You get one point.");
+                humanScore++;
+            } else if (computerChoice === 'paper'){
+                console.log("It's a tie! Paper does not win against itself. No points alloted for anyone.");
+            } else if (computerChoice === 'scissors') {
+                console.log("You lose! Scissors beats Paper. The computer gets one point.");
+                computerScore++;
+            }
+            break;
+        case 'scissors':
+            if (computerChoice === 'rock'){
+                console.log("You lose! Rock beats Scissors. The computer gets one point.");
+                computerScore++
+            } else if (computerChoice === 'paper'){
+                console.log("You win! Scissors beats Paper. You get one point.");
+                humanScore++;
+            } else if (computerChoice === 'scissors') {
+                console.log("It's a tie! Scissors does not win against itself. No points alloted for anyone.");
+            }
+            break;
+    }
+}
+
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection)
