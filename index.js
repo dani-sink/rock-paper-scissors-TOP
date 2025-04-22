@@ -1,7 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
-
 function getComputerChoice(){
     const computerChoiceNum = Math.floor(Math.random() * 3) + 1;
     let computerChoice;
@@ -45,48 +41,59 @@ function getHumanChoice(){
 }
 
 
-function playRound(humanChoice, computerChoice){
-    console.log(`Player Choice: ${humanChoice.toUpperCase()}`);
-    console.log(`Computer Choice: ${computerChoice.toUpperCase()}`);
-    switch(humanChoice){
-        case 'rock':
-            if (computerChoice === 'rock'){
-                console.log("It's a tie! Rock does not win against itself. No points alloted for anyone.");
-            } else if (computerChoice === 'paper'){
-                console.log("You lose! Paper beats Rock. The computer gets one point.");
-                computerScore++;
-            } else if (computerChoice === 'scissors') {
-                console.log("You win! Rock beats Scissors. You get one point.");
-                humanScore++;
-            }
-            break;
-        case 'paper':
-            if (computerChoice === 'rock'){
-                console.log("You win! Paper beats Rock. You get one point.");
-                humanScore++;
-            } else if (computerChoice === 'paper'){
-                console.log("It's a tie! Paper does not win against itself. No points alloted for anyone.");
-            } else if (computerChoice === 'scissors') {
-                console.log("You lose! Scissors beats Paper. The computer gets one point.");
-                computerScore++;
-            }
-            break;
-        case 'scissors':
-            if (computerChoice === 'rock'){
-                console.log("You lose! Rock beats Scissors. The computer gets one point.");
-                computerScore++
-            } else if (computerChoice === 'paper'){
-                console.log("You win! Scissors beats Paper. You get one point.");
-                humanScore++;
-            } else if (computerChoice === 'scissors') {
-                console.log("It's a tie! Scissors does not win against itself. No points alloted for anyone.");
-            }
-            break;
+function playGame(){
+    let humanScore = 0;
+    let computerScore = 0;
+    const playRound = function() {
+        let humanSelection = getHumanChoice();
+        let computerSelection = getComputerChoice();
+        console.log(`Player Choice: ${humanSelection.toUpperCase()}`);
+        console.log(`Computer Choice: ${computerSelection.toUpperCase()}`);
+        switch(humanSelection){
+            case 'rock':
+                if (computerSelection === 'rock'){
+                    console.log("It's a tie! Rock does not win against itself. No points alloted for anyone.");
+                } else if (computerSelection === 'paper'){
+                    console.log("You lose! Paper beats Rock. The computer gets one point.");
+                    computerScore++;
+                } else if (computerSelection === 'scissors') {
+                    console.log("You win! Rock beats Scissors. You get one point.");
+                    humanScore++;
+                }
+                break;
+            case 'paper':
+                if (computerSelection === 'rock'){
+                    console.log("You win! Paper beats Rock. You get one point.");
+                    humanScore++;
+                } else if (computerSelection === 'paper'){
+                    console.log("It's a tie! Paper does not win against itself. No points alloted for anyone.");
+                } else if (computerSelection === 'scissors') {
+                    console.log("You lose! Scissors beats Paper. The computer gets one point.");
+                    computerScore++;
+                }
+                break;
+            case 'scissors':
+                if (computerSelection === 'rock'){
+                    console.log("You lose! Rock beats Scissors. The computer gets one point.");
+                    computerScore++
+                } else if (computerSelection === 'paper'){
+                    console.log("You win! Scissors beats Paper. You get one point.");
+                    humanScore++;
+                } else if (computerSelection === 'scissors') {
+                    console.log("It's a tie! Scissors does not win against itself. No points alloted for anyone.");
+                }
+                break;
+        }
     }
+
+    for (let i = 0; i < 5; ++i){
+        playRound();
+        console.log(`****** SCORE SO FAR *****`);
+        console.log(`(PLAYER) ${humanScore} - ${computerScore} (COMPUTER)`);
+    }
+
+    console.log('\n\n******* FINAL SCORE ********');
+    console.log(`(PLAYER) ${humanScore} - ${computerScore} (COMPUTER)`)
 }
 
-
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection)
+playGame()
