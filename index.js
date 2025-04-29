@@ -4,6 +4,7 @@ const scissorsButton = document.querySelector("#scissors-btn");
 
 let humanScore = 0;
 let computerScore = 0;
+let numRounds = 0
 
 const h3 = document.createElement('h3');
 const div = document.querySelector('#results-ctn');
@@ -13,9 +14,10 @@ const paraThree = document.createElement('p');
 const divTwo = document.createElement('div');
 const paraFour = document.createElement('p');
 const h2 = document.createElement('h2');
+const roundText = document.createElement('h2');
 
 
-
+div.appendChild(roundText)
 div.appendChild(paraOne);
 div.appendChild(paraTwo);
 div.appendChild(paraThree);
@@ -44,48 +46,60 @@ const playRound = function(playerChoice) {
     let computerSelection = getComputerChoice();
     paraOne.textContent = `Player Choice: ${playerChoice.toUpperCase()}`;
     paraTwo.textContent = `Computer Choice: ${computerSelection.toUpperCase()}`;
+    paraThree.style.fontWeight = "600";
     switch(playerChoice){
         case 'rock':
             if (computerSelection === 'rock'){
                 paraThree.textContent = "It's a tie! Rock does not win against itself. No points alloted for anyone.";
+                paraThree.style.color = "#F5B800" // yellow
                 
             } else if (computerSelection === 'paper'){
                 paraThree.textContent = "You lose! Paper beats Rock. The computer gets one point.";
+                paraThree.style.color = "#A30003" // red
                 computerScore++;
             } else if (computerSelection === 'scissors') {
                 paraThree.textContent = "You win! Rock beats Scissors. You get one point.";
+                paraThree.style.color = "#11691A"; // green
                 humanScore++;
             }
             break;
         case 'paper':
             if (computerSelection === 'rock'){
                 paraThree.textContent = "You win! Paper beats Rock. You get one point.";
+                paraThree.style.color = "#11691A"; // green
                 humanScore++;
             } else if (computerSelection === 'paper'){
                 paraThree.textContent = "It's a tie! Paper does not win against itself. No points alloted for anyone.";
+                paraThree.style.color = "#F5B800" // yellow
             } else if (computerSelection === 'scissors') {
                 paraThree.textContent = "You lose! Scissors beats Paper. The computer gets one point.";
+                paraThree.style.color = "#A30003" // red
                 computerScore++;
             }
             break;
         case 'scissors':
             if (computerSelection === 'rock'){
                 paraThree.textContent = "You lose! Rock beats Scissors. The computer gets one point.";
+                paraThree.style.color = "#A30003" // red
                 computerScore++
             } else if (computerSelection === 'paper'){
                 paraThree.textContent = "You win! Scissors beats Paper. You get one point.";
+                paraThree.style.color = "#11691A"; // green
                 humanScore++;
             } else if (computerSelection === 'scissors') {
                 paraThree.textContent = "It's a tie! Scissors does not win against itself. No points alloted for anyone.";
+                paraThree.style.color = "#F5B800" // yellow    
             }
             break;
     }
+    roundText.textContent = `Round ${++numRounds}`;
     h3.textContent = `Score --> (PLAYER) ${humanScore} : ${computerScore} (COMPUTER)`;
     if (humanScore === 5 || computerScore === 5){
         let event = new CustomEvent('game-end', {
             detail: {
                 message: humanScore === 5 ? 
-                "You won. Good job!" : "You lost. No sweat. Try your luck again!"
+                "You won. Good job!" : "You lost. No sweat. Try your luck again!",
+                color: humanScore === 5 ? "#11691A" : "#A30003"
             }
         });
         div.dispatchEvent(event);
@@ -105,20 +119,18 @@ function resetGame(event){
     rockButton.disabled = false;
     paperButton.disabled = false;
     scissorsButton.disabled = false;
+    roundText.textContent = "";
     event.target.remove();
+    numRounds = 0;
 }
 
 function selectPlayerChoice(event){
-    switch (event.target.id){
-        case "rock-btn":
-            playRound('rock');
-            break;
-        case "paper-btn":
-            playRound('paper');
-            break;
-        case "scissors-btn":
-            playRound('scissors');
-            break;            
+    if (event.target.id === "rock-btn" || event.target.parentElement.id === "rock-btn"){
+        playRound('rock');   
+    } else if (event.target.id === "paper-btn" || event.target.parentElement.id === "paper-btn") {
+        playRound('paper');
+    } else if (event.target.id === "scissors-btn" || event.target.parentElement.id === "scissors-btn") {
+        playRound('scissors');
     }
 }
 
@@ -127,6 +139,8 @@ paperButton.addEventListener('click', selectPlayerChoice);
 scissorsButton.addEventListener('click', selectPlayerChoice);
 div.addEventListener('game-end', function(e) {
     paraFour.textContent = e.detail.message;
+    paraFour.style.color = e.detail.color;
+    paraFour.style.fontWeight = "600";
     rockButton.disabled = true;
     paperButton.disabled = true;
     scissorsButton.disabled = true;
@@ -137,5 +151,4 @@ div.addEventListener('game-end', function(e) {
     div.appendChild(paraFour);
     div.appendChild(h2);
     div.appendChild(button);
-    document.body.appendChild(div);
 })

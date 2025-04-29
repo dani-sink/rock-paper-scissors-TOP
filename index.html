@@ -5,11 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
     <script src="index.js" defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <button id="rock-btn">ROCK</button>
-    <button id="paper-btn">PAPER</button>
-    <button id="scissors-btn">SCISSORS</button>
-    <div id="results-ctn"></div>
+    <section>
+        <div class="buttons-ctn">
+            <div class="button-ctn" id="rock-btn">
+                <p>ROCK</p>
+                <img src="./images/fist.png" width="30" height="auto" alt="Rock Hand image">
+            </div>
+            <div class="button-ctn" id="paper-btn">
+                <p>PAPER</p>
+                <img src="./images/hand-paper.png" width="30" height="auto" alt="Paper Hand image">
+            </div>
+            <div class="button-ctn" id="scissors-btn">
+                <p>SCISSORS</p>
+                <img src="./images/scissors.png" width="30" height="auto" alt="Scissors Hand image">
+            </div>
+        </div>
+        <div id="results-ctn"></div>
+    </section>
+    <footer>
+        <ul>
+            <li>
+                <a href="https://www.flaticon.com/free-icons/fist" title="fist icons">Rock icon created by Cuputo - Flaticon</a>
+            </li>
+            <li>
+                <a href="https://www.flaticon.com/free-icons/rock-paper-scissors" title="rock paper scissors icons">Paper icon created by iconading - Flaticon</a>
+            </li>
+            <li>
+                <a href="https://www.flaticon.com/free-icons/rock-paper-scissors" title="rock paper scissors icons">Scissors icon created by Cap Cool - Flaticon</a>
+            </li>
+        </ul>
+    </footer>
 </body>
 </html>
