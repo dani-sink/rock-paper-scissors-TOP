@@ -19,6 +19,7 @@ section {
     justify-content: center;
     align-items: center;
     gap: 30px;
+    margin-bottom: 20px;
 }
 
 
@@ -67,6 +68,32 @@ button {
 footer {
     display: flex;
     justify-content: center;
+}
+
+
+table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 1.1em;
+    min-width: 400px;
+}
+
+table thead tr {
+    background-color: #1E555C;
+    color: #fff;
+    text-align: center;
+}
+
+table th {
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    min-width: 175px;
+}
+
+table tbody tr {
+    border-bottom: 2px solid #ddd;
+    border-left: 2px solid #ddd;
+    border-right: 2px solid #ddd;
 }
 
 
